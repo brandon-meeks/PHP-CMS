@@ -19,18 +19,23 @@
                             <small>Author</small>
                         </h1>
                         
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Category Title</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    
-                            </tbody>
-                        </table>
+                        <?php
+                            
+                            if(isset($_GET['source'])) {
+                                
+                                $source = $_GET['source'];
+                                
+                            }
+                        
+                        switch($source) {
+                            
+                            default:
+                                include "includes/view_all_posts.php";
+                            break;
+                        }
+                        
+                        
+                        ?>
                         
                     </div>
                 </div>
