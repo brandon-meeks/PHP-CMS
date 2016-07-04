@@ -92,11 +92,13 @@ function findAllPosts() {
         echo "<td>{$post_title}</td>";
         echo "<td>{$post_author}</td>";
         echo "<td>{$post_cat_id}</td>";
-        echo "<td><img src='../images/{$post_image}' alt='{$post_image}' title='{$post_image}' class='img-thumbnail'/></td>";
+        echo "<td><img src='../images/{$post_image}' alt='{$post_image}' title='{$post_image}' class='img-thumbnail' width='100'/></td>";
         echo "<td>{$post_tags}</td>";
         echo "<td>{$post_comment_count}</td>";
         echo "<td>{$post_date}</td>";
         echo "<td>{$post_status}</td>";
+        echo "<td><a href='posts.php?delete={$post_id}' title='delete post'><i class='fa fa-trash'>&nbsp;&nbsp;</i></a>|";
+        echo "<a href='posts.php?source=edit_post&p_id={$post_id}' title='edit post'> <i class='fa fa-pencil-square-o'></i></a></td>";
         echo "</tr>";
 
     }
@@ -142,6 +144,24 @@ function createPost() {
             
         }
         
+    }
+    
+}
+
+function editPost() {
+
+}
+
+function deletePost() {
+    
+    global $connection;
+    
+    if(isset($_GET['delete'])) {
+                                        
+        $the_post_id = $_GET['delete'];
+        $query = "DELETE FROM posts WHERE post_id = {$the_post_id} ";
+        $delete_query = mysqli_query($connection, $query);
+        header("Location: posts.php");
     }
     
 }

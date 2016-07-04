@@ -11,11 +11,18 @@
                 <th>Comments</th>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
 
         <?php findAllPosts(); ?>
+
+        <?php deletePost(); ?>
+
+        </tbody>
+
+        </tbody>
 
         </tbody>
     </table>
