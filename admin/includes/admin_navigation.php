@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Admin</a>
+                <a class="navbar-brand" href="index.php">DesineCo CMS Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -39,7 +39,7 @@
                         <a href="categories.php"><i class="fa fa-fw fa-list"></i> Categories</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-comments"></i> Comments</a>
+                        <a href="comments.php"><i class="fa fa-fw fa-comments"></i> Comments</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#users"><i class="fa fa-fw fa-users"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>

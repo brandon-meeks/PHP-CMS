@@ -88,7 +88,7 @@
 
     <div class="form-group">
     	<label>Category</label>
-    	<select name="post_category" id="" class="form-control">
+    	<select name="post_category" id="">
 
     	<?php
 
@@ -118,7 +118,7 @@
     
     <div class="form-group">
         <label for="post_status">Status</label>
-        <select value="<?php echo $post_status; ?>" name="post_status" class="form-control">
+        <select value="<?php echo $post_status; ?>" name="post_status">
             <option>Draft</option>
             <option>Published</option>
         </select>

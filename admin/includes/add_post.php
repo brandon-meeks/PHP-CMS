@@ -9,7 +9,26 @@
 
     <div class="form-group">
         <label for="post_title">Post Category</label>
-        <input type="text" name="post_cat" class="form-control">
+        <select name="post_category" id="">
+
+        <?php
+
+            $query = "SELECT *  FROM categories";
+                            
+            $edit_post_cat = mysqli_query($connection, $query);
+    
+            while($row = mysqli_fetch_assoc($edit_post_cat)) {
+                $cat_id = $row['cat_id'];
+                $cat_title = $row['cat_title'];
+
+                echo "<option value='{$cat_id}'>{$cat_title}</option>";
+
+            }
+
+
+        ?>
+
+        </select>
     </div>
     
     <div class="form-group">
