@@ -136,12 +136,11 @@ function createPost() {
         $post_content = $_POST['post_content'];
         
         $post_date = date('m-d-y');
-        // $post_comment_count = 0;
         
         
         move_uploaded_file($post_image_temp, "../images/$post_image");
         
-        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status )";
+        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags,  post_status )";
         $query .= "VALUES({$post_cat},'{$post_title}','{$post_author}','{$post_date}','{$post_image}','{$post_content}','{$post_tags}','{$post_status}') ";
         
         $create_post_query = mysqli_query($connection, $query);
@@ -266,10 +265,130 @@ function deleteComment() {
     
 }
 
+function findAllUsers() {
+    
+    global $connection;
+    
+    $query = "SELECT *  FROM users";
+    $find_users_admin = mysqli_query($connection, $query);
 
+    while($row = mysqli_fetch_assoc($find_users_admin)) {
+        $user_id = $row['user_id'];
+        $username = $row['username'];
+        $user_password = $row['user_password'];
+        $user_firstName = $row['user_firstName'];
+        $user_lastName = $row['user_lastName'];
+        $user_email = $row['user_email'];
+        $user_image = $row['user_image'];
+        $user_role = $row['user_role'];
+        $user_status = $row['user_status'];
 
+        echo "<tr>";
+        echo "<td>{$user_id}</td>";
+        echo "<td>{$username}</td>";
+        echo "<td>{$user_firstName}</td>";
+        echo "<td>{$user_lastName}</td>";
+        echo "<td>{$user_email}</td>";
 
+        if(empty($user_image)) {
+            echo "<td></td>";
+        } else {
+            echo "<td><img src='../images/{$user_image}'/></td>";
+        }
+        echo "<td>{$user_role}</td>";
+        echo "<td>{$user_status}</td>";
+        echo "<td><a href='users.php?approve=$user_id' title='approve user' class='text-success'><i class='fa fa-thumbs-up'></i></a>&nbsp;|&nbsp;";
+        echo "<a href='users.php?unapprove=$user_id' title='unapprove user'><i class='fa fa-thumbs-down'></i></a>&nbsp;|&nbsp;";
+        echo "<a href='users.php?source=edit_user&user_id={$user_id}' title='edit user'><i class='fa fa-pencil-square-o'></i></a>&nbsp;|&nbsp";
+        echo "<a href='users.php?delete=$user_id' title='delete user' class='text-danger'><i class='fa fa-trash'></i></a></td>";
+        echo "</tr>";
 
+    }
+}
+
+function approveUser() {
+    
+    global $connection;
+    
+    if(isset($_GET['approve'])) {
+                                        
+        $the_user_id = $_GET['approve'];
+        $query = "UPDATE users SET user_status = 'Approved' WHERE user_id = $the_user_id ";
+        $approve_user_query = mysqli_query($connection, $query);
+        header("Location: users.php");
+    }
+    
+}
+
+function unapproveUser() {
+    
+    global $connection;
+    
+    if(isset($_GET['unapprove'])) {
+                                        
+        $the_user_id = $_GET['unapprove'];
+        $query = "UPDATE users SET user_status = 'Unapproved' WHERE user_id = $the_user_id ";
+        $approve_user_query = mysqli_query($connection, $query);
+        header("Location: users.php");
+    }
+    
+}
+
+function createUser() {
+    
+    global $connection;
+    
+        if(isset($_POST['create_user'])) {
+        
+            $username = $_POST['username'];
+            $user_password = $_POST['user_password'];
+            $user_firstName = $_POST['user_firstName'];
+            $user_lastName = $_POST['user_lastName'];
+            $user_email = $_POST['user_email'];
+
+            $user_image = $_FILES['user_image']['name'];
+            $user_image_temp = $_FILES['user_image']['tmp_name'];
+
+            $user_role = $_POST['user_role'];
+            $user_status = $_POST['user_status'];
+        
+        
+        move_uploaded_file($user_image_temp, "../images/users/$user_image");
+        
+        $query = "INSERT INTO users(username, user_password, user_firstName, user_lastName, user_email, user_image, user_role, user_status)";
+        $query .= "VALUES('{$username}', '{$user_password}', '{$user_firstName}', '{$user_lastName}', '{$user_email}', '{$user_image}', '{$user_role}', '{$user_status}') ";
+        
+        $create_user_query = mysqli_query($connection, $query);
+        
+        if(!$create_user_query) {
+
+            die('User creation failed ' . mysqli_error($connection));
+
+        } else {
+            
+            echo "<div class='alert alert-success alert-dismissible' role='alert'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                    User was created successfully!</div>";
+            
+        }
+        
+    }
+    
+}
+
+function deleteUser() {
+    
+    global $connection;
+    
+    if(isset($_GET['delete'])) {
+                                        
+        $the_user_id = $_GET['delete'];
+        $query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
+        $delete_query = mysqli_query($connection, $query);
+        header("Location: users.php");
+    }
+    
+}
 
 
 
