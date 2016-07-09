@@ -22,62 +22,9 @@
 
     }
 
-    // Update Post Query
-    if(isset($_POST['update_user'])) {
-
-        $username = $_POST['username'];
-        // $user_password = $_POST['user_password'];
-        $user_firstName = $_POST['user_firstName'];
-        $user_lastName = $_POST['user_lastName'];
-        $user_email = $_POST['user_email'];
-
-        $user_image = $_FILES['user_image']['name'];
-        $user_image_temp = $_FILES['user_image']['tmp_name'];
-
-        $user_role = $_POST['user_role'];
-        $user_status = $_POST['user_status'];
-        
-        
-        move_uploaded_file($user_image_temp, "../images/users/$user_image");
-
-        if(empty($user_image)) {
-            $query = "SELECT * FROM users WHERE user_id = $select_user_id ";
-            $select_image = mysqli_query($connection, $query);
-
-            while($row = mysqli_fetch_array($select_image)) {
-                $user_image = $row['user_image'];
-            }
-        }
-
-
-        $query = "UPDATE users SET ";
-        $query .= "username = '{$username}', ";
-        // $query .= "user_password = '{$user_password}', ";
-        $query .= "user_firstName = '{$user_firstName}', ";
-        $query .= "user_lastName = '{$user_lastName}', ";
-        $query .= "user_email = '{$user_email}', ";
-        $query .= "user_image = '{$user_image}', ";
-        $query .= "user_role = '{$user_role}', ";
-        $query .= "user_status = '{$user_status}' ";
-        $query .= "WHERE user_id = {$select_user_id} ";
-
-        $update_post = mysqli_query($connection, $query);
-
-        if(!$update_post) {
-
-            die('Post update failed ' . mysqli_error($connection));
-
-        } else {
-            
-            echo "<div class='alert alert-success alert-dismissible' role='alert'>
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                    Post was updated successfully!</div>";
-            
-        }
-
-    }
-
 ?>
+
+<?php updateUser(); ?>
 
 <form action="" method="post" enctype="multipart/form-data">
 

@@ -33,17 +33,15 @@
 
 	}
 	// If username and password are not in database, redirect to index
-	if($login_username !== $username && $login_password !== $password ) {
-		header("Location: ../index.php");
-	} elseif ($login_username == $username && $login_password == $password) { // If username and password are in database user is logged in 
-		// Logged in user's session is created and below information is stored in session
+	if($login_username === $username && $login_password === $password ) {
+
 		$_SESSION['username'] = $username;
 		$_SESSION['user_firstName'] = $user_firstName;
 		$_SESSION['user_role'] = $user_role;
 		$_SESSION['user_status'] = $user_status;
 
-		// Logged in user is redirected to admin portal
 		header("Location: ../admin");
+
 	} else { // If all else fails user is redirected to index
 		header("Location: ../index.php");
 	}
