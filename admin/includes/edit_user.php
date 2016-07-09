@@ -114,9 +114,19 @@
     
     <div class="form-group">
         <label for="user_role">Role</label>
-        <select name="user_role" value="<?php echo $user_role ?>">
-            <option>Basic User</option>
-            <option>Admin</option>
+        <select name="user_role" >
+            <option value="Basic User"><?php echo $user_role; ?></option>
+
+            <?php
+
+                if($user_role == 'Admin') {
+                    echo "<option value='Basic User'>Basic User</option>";
+                } else {
+                    echo "<option value='Admin'>Admin</option>";
+                }
+
+
+            ?>
         </select>
     </div>
 
@@ -130,6 +140,7 @@
     
     <div>
         <input type="submit" name="update_user" value="Update User" class="btn btn-primary">
+        <a href="users.php" role="button" class="btn btn-default">Cancel</a>
     </div>
 
 </form>

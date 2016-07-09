@@ -50,6 +50,7 @@
     
     <div>
         <input type="submit" name="create_user" value="Create User" class="btn btn-primary">
+        <a href="users.php" role="button" class="btn btn-default">Cancel</a>
     </div>
 
 </form>

@@ -290,11 +290,11 @@ function findAllUsers() {
         echo "<td>{$user_lastName}</td>";
         echo "<td>{$user_email}</td>";
 
-        if(empty($user_image)) {
-            echo "<td></td>";
-        } else {
-            echo "<td><img src='../images/{$user_image}'/></td>";
-        }
+        // if(empty($user_image)) {
+        //     echo "<td></td>";
+        // } else {
+        //     echo "<td><img src='../images/users/{$user_image}'/></td>";
+        // }
         echo "<td>{$user_role}</td>";
         echo "<td>{$user_status}</td>";
         echo "<td><a href='users.php?approve=$user_id' title='approve user' class='text-success'><i class='fa fa-thumbs-up'></i></a>&nbsp;|&nbsp;";

@@ -2,6 +2,7 @@
 
 
 <div class="table-responsive">
+    <a href="?source=add_user" class="pull-left"><i class="fa fa-plus"></i> Add User</a>
     <table class="table table-hover table-condensed">
         <thead>
             <tr>
@@ -10,7 +11,6 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
-                <th>Image</th>
                 <th>Role</th>
                 <th>Status</th>
                 <th>Actions</th>

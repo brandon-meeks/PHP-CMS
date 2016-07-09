@@ -1,5 +1,19 @@
-<?php ob_start(); ?>
 <?php include "../includes/db.php" ?>
+<?php ob_start(); ?>
+<?php session_start(); ?>
+
+<?php //Checks if logged in user has role of Admin and if not redirects them to root index
+
+    if(isset($_SESSION['user_role'])) {
+
+        if($_SESSION['user_role'] !== 'Admin') {
+            header("Location: ../index.php");
+        }
+    }
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
