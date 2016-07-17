@@ -41,6 +41,11 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+    <!-- TinyMCE -->
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script src="js/tinymce.js"></script>
+
+
 </head>
 
 <body>
