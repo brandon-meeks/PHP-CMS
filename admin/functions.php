@@ -89,6 +89,7 @@ function findAllPosts() {
         $post_status = $row['post_status'];
 
         echo "<tr>";
+        echo "<td><input type='checkbox' id='' name=''></td>";
         echo "<td>{$post_id}</td>";
         echo "<td>{$post_title}</td>";
         echo "<td>{$post_author}</td>";
@@ -104,7 +105,6 @@ function findAllPosts() {
                 echo "<td>{$cat_title}</td>";
 
             }
-
 
         echo "<td><img src='../images/{$post_image}' alt='{$post_image}' title='{$post_image}' class='img-thumbnail' width='100'/></td>";
         echo "<td>{$post_tags}</td>";

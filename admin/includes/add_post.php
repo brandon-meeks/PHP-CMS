@@ -61,6 +61,7 @@
     
     <div>
         <input type="submit" name="create_post" value="Create Post" class="btn btn-primary">
+        <a href="posts.php" role="button" class="btn btn-default">Cancel</a>
     </div>
 
 </form>
