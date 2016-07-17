@@ -44,7 +44,16 @@
                 </p> -->
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo $post_date; ?> </p>
                 <hr>
-                <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
+
+                <?php 
+
+                    if(empty($post_image)) {
+                        echo "";
+                    } else {
+                        echo "<img class='img-responsive' src='images/{$post_image}' alt=''>";
+                    }
+
+                ?>
                 <hr>
                 <p><?php echo $post_content; ?></p>
                 

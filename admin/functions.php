@@ -89,9 +89,13 @@ function findAllPosts() {
         $post_status = $row['post_status'];
 
         echo "<tr>";
-        echo "<td><input type='checkbox' id='' name=''></td>";
+        ?>
+
+        <td><input type="checkbox" class="checkboxes" name="checkboxArray[]" value="<?php echo $post_id; ?>"></td>
+
+        <?php
         echo "<td>{$post_id}</td>";
-        echo "<td>{$post_title}</td>";
+        echo "<td><a href='../post.php?p_id={$post_id}' target='blank'>{$post_title}</a></td>";
         echo "<td>{$post_author}</td>";
 
             $cat_query = "SELECT *  FROM categories WHERE cat_id = $post_cat_id ";
@@ -105,8 +109,12 @@ function findAllPosts() {
                 echo "<td>{$cat_title}</td>";
 
             }
-
-        echo "<td><img src='../images/{$post_image}' alt='{$post_image}' title='{$post_image}' class='img-thumbnail' width='100'/></td>";
+        if(empty($post_image)) {
+            echo "<td></td>";
+        } else {
+            echo "<td><img src='../images/{$post_image}' alt='{$post_image}' title='{$post_image}' class='img-thumbnail' width='100'/></td>";
+        }
+        
         echo "<td>{$post_tags}</td>";
         echo "<td>{$post_comment_count}</td>";
         echo "<td>{$post_date}</td>";

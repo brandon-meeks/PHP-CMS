@@ -30,18 +30,18 @@
 
         </select>
     </div>
+
+    <div class="form-group">
+        <label for="post_status">Status</label>
+        <select name="post_status">
+            <option value="Draft">Draft</option>
+            <option value="Published">Published</option>
+        </select>
+    </div>
     
     <div class="form-group">
         <label for="post_author">Post Author</label>
         <input type="text" name="post_author" class="form-control">
-    </div>
-    
-    <div class="form-group">
-        <label for="post_status">Status</label>
-        <select name="post_status" class="form-control">
-            <option>Draft</option>
-            <option>Published</option>
-        </select>
     </div>
 
     <div class="form-group">
