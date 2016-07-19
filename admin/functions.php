@@ -362,9 +362,16 @@ function createUser() {
         
         
         move_uploaded_file($user_image_temp, "../images/users/$user_image");
+
+        $saltQuery = "SELECT randSalt FROM users ";
+        $randSaltQuery = mysqli_query($connection, $saltQuery);
+        $row = mysqli_fetch_array($randSaltQuery);
+        $salt = $row['randSalt'];
+
+        $password = crypt($user_password, $salt); // Encrpts the user's password
         
         $query = "INSERT INTO users(username, user_password, user_firstName, user_lastName, user_email, user_image, user_role, user_status)";
-        $query .= "VALUES('{$username}', '{$user_password}', '{$user_firstName}', '{$user_lastName}', '{$user_email}', '{$user_image}', '{$user_role}', '{$user_status}') ";
+        $query .= "VALUES('{$username}', '{$password}', '{$user_firstName}', '{$user_lastName}', '{$user_email}', '{$user_image}', '{$user_role}', '{$user_status}') ";
         
         $create_user_query = mysqli_query($connection, $query);
         
@@ -375,8 +382,7 @@ function createUser() {
         } else {
             
             echo "<div class='alert alert-success alert-dismissible' role='alert'>
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                    User was created successfully!</div>";
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User was created successfully!</div>";
             
         }
         
