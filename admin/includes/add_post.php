@@ -41,7 +41,7 @@
     
     <div class="form-group">
         <label for="post_author">Post Author</label>
-        <input type="text" name="post_author" class="form-control">
+        <input type="text" name="post_author" class="form-control" value="<?php echo $_SESSION['username']; ?>">
     </div>
 
     <div class="form-group">

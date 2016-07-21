@@ -73,7 +73,7 @@ function findAllPosts() {
     
     global $connection;
     
-    $query = "SELECT *  FROM posts";
+    $query = "select * from posts ORDER BY post_date DESC";
     $select_posts_admin = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_assoc($select_posts_admin)) {
@@ -148,8 +148,8 @@ function createPost() {
         
         move_uploaded_file($post_image_temp, "../images/$post_image");
         
-        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags,  post_status )";
-        $query .= "VALUES({$post_cat},'{$post_title}','{$post_author}','{$post_date}','{$post_image}','{$post_content}','{$post_tags}','{$post_status}') ";
+        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags,  post_status) ";
+        $query .= "VALUES({$post_cat},'{$post_title}','{$post_author}', now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}') ";
         
         $create_post_query = mysqli_query($connection, $query);
         

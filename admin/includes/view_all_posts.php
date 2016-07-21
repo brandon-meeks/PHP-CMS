@@ -20,7 +20,7 @@
 
                         } else {
             
-                            echo "<div class='alert alert-success alert-dismissible col-xs-4' role='alert'>
+                            $message = "<div class='alert alert-success alert-dismissible col-xs-4' role='alert'>
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Post was published successfully!</div>";
             
                         }
@@ -37,7 +37,7 @@
 
                         } else {
             
-                            echo "<div class='alert alert-success alert-dismissible col-xs-4' role='alert'>
+                            $message = "<div class='alert alert-success alert-dismissible col-xs-4' role='alert'>
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Post was unpublished successfully!</div>";
             
                         }
@@ -54,9 +54,36 @@
 
                         } else {
             
-                            echo "<div class='alert alert-success alert-dismissible col-xs-4' role='alert'>
+                            $message = "<div class='alert alert-success alert-dismissible col-xs-4' role='alert'>
                             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Post deleted successfully!</div>";
             
+                        }
+                        break;
+
+                    case 'Clone':
+                        $query = "SELECT * FROM posts WHERE post_id = $checkboxValue ";
+                        $selectPostQuery = mysqli_query($connection, $query);
+
+                        while($row = mysqli_fetch_array($selectPostQuery)) {
+                            $post_title = $row['post_title'];
+                            $post_cat_id = $row['post_category_id'];
+                            $post_date = date('d-m-Y');
+                            $post_author = $row['post_author'];
+                            $post_status = $row['post_status'];
+                            $post_image = $row['post_image'];
+                            $post_tags = $row['post_tags'];
+                            $post_content = $row['post_content'];
+                        }
+
+                        $query = "INSERT INTO posts(post_category_id, post_title, post_date, post_author, post_status, post_image, post_tags, post_content) ";
+                        $query .= "VALUES({$post_cat_id}, '{$post_title}', now(), '{$post_author}', '{$post_status}', '{$post_image}', '{$post_tags}', '{$post_content}') ";
+                        $clonePostQuery = mysqli_query($connection, $query);
+
+                        if(!$clonePostQuery) {
+                            die("Post Cloning Failed! " . mysqli_error($connection));
+                        } else {
+                            $message = "<div class='alert alert-success alert-dismissible col-xs-4' role='alert'>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Posts were cloned successfully!</div>";
                         }
                         break;
                     
@@ -67,6 +94,8 @@
 
             }
 
+        } else {
+            $message = "";
         }
 
 
@@ -77,6 +106,7 @@
     
 
     <form action="" method="post" name="bulkMethod">
+        <?php echo $message; ?>
 
         <div id="bulkOptionsContainer">
             <div class="col-xs-2">
@@ -84,6 +114,7 @@
                     <option value="">Select Option</option>
                     <option value="Published">Published</option>
                     <option value="Draft">Draft</option>
+                    <option value="Clone">Clone</option>
                     <option value="Delete">Delete</option>
                 </select>
             </div>

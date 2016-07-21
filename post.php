@@ -69,10 +69,12 @@
  
             </div>
 
-            <!-- Blog Sidebar Widgets Column -->
-           <?php include "includes/sidebar.php" ?>
+
 
         </div>
+
+    <!-- Blog Sidebar Widgets Column -->
+<?php include "includes/sidebar.php" ?>
         <!-- /.row -->
 
         <hr>

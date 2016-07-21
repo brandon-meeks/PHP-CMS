@@ -113,7 +113,7 @@
     
     <div class="form-group">
         <label for="post_author">Post Author</label>
-        <input value="<?php echo $post_author; ?>" type="text" name="post_author" class="form-control">
+        <input value="<?php echo $post_author; ?>" type="text" name="post_author" class="form-control" disabled>
     </div>
     
     <div class="form-group">
