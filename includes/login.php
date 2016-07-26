@@ -32,6 +32,9 @@
 
 
 	}
+
+	$login_password = crypt($login_password, $password);
+
 	// If username and password are not in database, redirect to index
 	if($login_username === $username && $login_password === $password ) {
 

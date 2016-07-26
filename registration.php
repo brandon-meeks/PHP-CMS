@@ -3,6 +3,7 @@
 
  <?php 
 
+<<<<<<< HEAD
     if(isset($_POST['submit'])) {
         $username = $_POST['username'];
         $email = $_POST['email'];
@@ -46,6 +47,40 @@
         $message = "";
     }
 
+=======
+ if(isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $username = mysqli_real_escape_string($connection, $username);
+    $email = mysqli_real_escape_string($connection, $email);
+    $password = mysqli_real_escape_string($connection, $password);
+
+    $saltQuery = "SELECT randSalt FROM users ";
+    $randSaltQuery = mysqli_query($connection, $saltQuery);
+    $row = mysqli_fetch_array($randSaltQuery);
+    $salt = $row['randSalt'];
+
+    $password = crypt($password, $salt); // Encrypts user's password
+
+    $query = "INSERT INTO users(username, user_email, user_password, user_role, user_status) ";
+    $query .= "VALUES('{$username}', '{$email}', '{$password}', 'Basic User', 'Unapproved') ";
+    $registerUserQuery = mysqli_query($connection, $query);
+
+    if(!$registerUserQuery) {
+        die("User registration failed! " . mysqli_error($connection));
+    } else {
+        $message = "<div class='alert alert-success alert-dismissible' role='alert'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>User registered successfully!</div>";
+    }
+
+ } else {
+    $message = "";
+ }
+
+
+>>>>>>> d1e4f693acbb811607f415002033d522c4c8677f
 
  ?>
 
@@ -63,11 +98,19 @@
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
+<<<<<<< HEAD
                 <h1>Register</h1>
                 <?php echo $message; ?>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="username" class="sr-only">Username</label>
+=======
+                <?php echo $message; ?>
+                <h1>Register</h1>
+                    <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                        <div class="form-group">
+                            <label for="username" class="sr-only">username</label>
+>>>>>>> d1e4f693acbb811607f415002033d522c4c8677f
                             <input type="text" name="username" id="username" required="true" class="form-control" placeholder="Enter Desired Username">
                         </div>
                          <div class="form-group">
