@@ -73,7 +73,7 @@ function findAllPosts() {
     
     global $connection;
     
-    $query = "select * from posts ORDER BY post_date DESC";
+    $query = "select * from posts ORDER BY post_id DESC";
     $select_posts_admin = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_assoc($select_posts_admin)) {
