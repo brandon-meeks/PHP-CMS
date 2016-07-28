@@ -21,6 +21,7 @@
         $post_tags = $row['post_tags'];
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
+        $post_view_count = $row['post_view_count'];
 
     }
 
@@ -38,6 +39,7 @@
         $post_content = $_POST['post_content'];
         $post_tags = $_POST['post_tags'];
         $post_status = $_POST['post_status'];
+        $post_view_count = $_POST['post_views'];
 
         move_uploaded_file($post_image_temp, "../images/$post_image");
 
@@ -78,6 +80,8 @@
     }
 
  ?>
+
+<!--  <?php resetPostViews(); ?> -->
 
 <form action="" method="post" enctype="multipart/form-data">
 

@@ -87,6 +87,7 @@ function findAllPosts() {
         $post_tags = $row['post_tags'];
         $post_comment_count = $row['post_comment_count'];
         $post_status = $row['post_status'];
+        $post_view_count = $row['post_view_count'];
 
         echo "<tr>";
         ?>
@@ -117,6 +118,7 @@ function findAllPosts() {
         
         echo "<td>{$post_tags}</td>";
         echo "<td>{$post_comment_count}</td>";
+        echo "<td>{$post_view_count} <a href='posts.php?reset={$post_id}' title='Reset view count'><i class='fa fa-refresh'></i></a></td>";
         echo "<td>{$post_date}</td>";
         echo "<td>{$post_status}</td>";
         echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}' title='edit post'><i class='fa fa-pencil-square-o'></i></a>&nbsp;";
@@ -183,6 +185,24 @@ function deletePost() {
         $query = "DELETE FROM posts WHERE post_id = {$the_post_id} ";
         $delete_query = mysqli_query($connection, $query);
         header("Location: posts.php");
+    }
+    
+}
+
+function resetPostViews() {
+    
+    global $connection;
+    
+    if(isset($_GET['reset'])) {
+                                        
+        $the_post_id = $_GET['reset'];
+        $query = "UPDATE posts SET post_view_count = 0 WHERE post_id = {$the_post_id} ";
+        $reset_query = mysqli_query($connection, $query);
+        header("Location: posts.php");
+
+        if(!$reset_query) {
+            die("Reset Failed" . mysqli_error($connection));
+        }
     }
     
 }

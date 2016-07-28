@@ -15,19 +15,24 @@
                 if(isset($_GET['p_id'])) {
 
                     $view_post_id = $_GET['p_id'];
+                    $view_query = "UPDATE posts SET post_view_count = post_view_count + 1 WHERE post_id = {$view_post_id} ";
+                    $send_query = mysqli_query($connection, $view_query);
+
+                    if (!$send_query) {
+                        die("Query Failed!" . mysqli_error($connection));
+                    }
                    
-                }
-                
-                $query = "SELECT * FROM posts WHERE post_id = {$view_post_id}";
-                $select_all_posts = mysqli_query($connection, $query);
-                
-                while($row = mysqli_fetch_assoc($select_all_posts)) {
-                    $post_id = $row['post_id'];
-                    $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
-                    $post_date = $row['post_date'];
-                    $post_image = $row['post_image'];
-                    $post_content = $row['post_content'];
+                                
+                    $query = "SELECT * FROM posts WHERE post_id = {$view_post_id}";
+                    $select_all_posts = mysqli_query($connection, $query);
+                    
+                    while($row = mysqli_fetch_assoc($select_all_posts)) {
+                        $post_id = $row['post_id'];
+                        $post_title = $row['post_title'];
+                        $post_author = $row['post_author'];
+                        $post_date = $row['post_date'];
+                        $post_image = $row['post_image'];
+                        $post_content = $row['post_content'];
                     
                     ?>
             <div class="col-md-8">
@@ -60,7 +65,7 @@
                 <hr>
                     
               <?php } ?>
-
+        <?php } ?>
 
               <?php include "includes/comments.php"; ?>
 

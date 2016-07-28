@@ -134,6 +134,7 @@
                     <th>Image</th>
                     <th>Tags</th>
                     <th>Comments</th>
+                    <th>View Count <a href="#">&nbsp;<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="How many times this post has been viewed"></i></a></th>
                     <th>Date</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -142,6 +143,8 @@
             <tbody>
 
             <?php findAllPosts(); ?>
+
+            <?php resetPostViews(); ?>
 
             <?php deletePost(); ?>
 
