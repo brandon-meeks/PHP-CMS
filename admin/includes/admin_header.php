@@ -29,7 +29,9 @@
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
-    <link href="css/styles.css" rel="stylesheet">
+    
+    <link href="css/pace.css" rel="stylesheet">
+
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -46,6 +48,7 @@
     <!-- TinyMCE -->
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="js/tinymce.js"></script>
+    <script src="js/pace.js"></script>
 
 
 </head>
