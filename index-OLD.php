@@ -18,28 +18,7 @@
                 
                 <?php
 
-                $posts_per_page = 0;
-
-                // finds all posts and gets total post count
-                $post_count_query = "SELECT * FROM posts";
-                $find_count = mysqli_query($connection, $post_count_query);
-                $count = mysqli_num_rows($find_count);
-
-                $count = ceil($count / 5);
-
-                if (isset($_GET['page'])) {
-                    $page = $_GET['page'];
-                } else {
-                    $page = "";
-                }
-                // sets the page to only show 5 posts
-                if ($page == "" || $page == 1) {
-                    $page_1 = 0;
-                } else {
-                    $page_1 = ($page * 5) - 5;
-                }
-
-                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_date DESC LIMIT $page_1, 5 ";
+                $query = "SELECT * FROM posts WHERE post_status = 'published' ORDER BY post_date DESC ";
                 $select_all_posts = mysqli_query($connection, $query);
                 
                 while($row = mysqli_fetch_assoc($select_all_posts)) {
@@ -87,29 +66,19 @@
                 <hr>
 
                 <!-- Pager -->
-                <ul class="pagination pagination-lg">
-                    <?php 
-
-                        for ($i=1; $i <= $count; $i++) {
-
-                            if($i == $page) {
-
-                                echo "<li><a href='index.php?page={$i}' class='active_link'>$i</a></li>";
-
-                            } else {
-                            
-                            echo "<li><a href='index.php?page={$i}'>$i</a></li>";
-                        }
-
-                    }
-
-                    ?>
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="#">&larr; Older</a>
+                    </li>
+                    <li class="next">
+                        <a href="#">Newer &rarr;</a>
+                    </li>
                 </ul>
 
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
-           <?php include "includes/sidebar.php"; ?>
+           <?php include "includes/sidebar.php" ?>
 
         </div>
         <!-- /.row -->
