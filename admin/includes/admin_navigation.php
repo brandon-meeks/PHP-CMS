@@ -55,6 +55,9 @@
                     <li>
                         <a href="profile.php"><i class="fa fa-wh fa-user"></i> Profile</a>
                     </li>
+                    <li>
+                        <a href="settings.php"><i class="fa fa-gear"></i> Settings</a>
+                    </li>
                     
 <!--
                     <li>

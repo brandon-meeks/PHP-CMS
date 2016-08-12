@@ -14,7 +14,7 @@
         </thead>
         <tbody>
 
-        <?php findAllComments(); ?>
+        <?php findPostComments(); ?>
 
         <?php approveComment(); ?>
 

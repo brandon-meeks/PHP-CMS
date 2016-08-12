@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2016 at 10:16 PM
+-- Generation Time: Aug 12, 2016 at 11:02 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -62,7 +62,7 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`comment_id`, `comment_post_id`, `comment_date`, `comment_author`, `comment_email`, `comment_content`, `comment_status`) VALUES
 (6, 1, '2016-07-05', 'Brandon Meeks', 'brandon@sjconfections.com', 'This is an amazing comment!', 'Unapproved'),
-(7, 1, '2016-07-08', 'John Dow', 'john@example.com', 'I love this post so much!', 'Approved'),
+(7, 1, '2016-07-08', 'John Dow', 'john@example.com', 'I love this post so much!', 'Unapproved'),
 (8, 19, '2016-07-26', 'Brandon', 'brandon@test.com', 'This is an awesome post!', 'Approved');
 
 -- --------------------------------------------------------
@@ -72,6 +72,7 @@ INSERT INTO `comments` (`comment_id`, `comment_post_id`, `comment_date`, `commen
 --
 
 CREATE TABLE `google_analytics` (
+  `id` int(11) NOT NULL,
   `tracking_code` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -112,6 +113,27 @@ INSERT INTO `posts` (`post_id`, `post_category_id`, `post_title`, `post_author`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `site_settings`
+--
+
+CREATE TABLE `site_settings` (
+  `id` int(11) NOT NULL,
+  `site_name` varchar(255) NOT NULL,
+  `site_admin_email` varchar(255) NOT NULL,
+  `googleAnalyticsIsEnabled` tinyint(1) NOT NULL,
+  `tracking_code` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `site_settings`
+--
+
+INSERT INTO `site_settings` (`id`, `site_name`, `site_admin_email`, `googleAnalyticsIsEnabled`, `tracking_code`) VALUES
+(0, 'Test Site', '', 0, '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -137,7 +159,8 @@ INSERT INTO `users` (`user_id`, `username`, `user_password`, `user_firstName`, `
 (2, 'webmaster', 'webmaster', 'Web', 'Testery', 'webmaster@example.com', '', 'Basic User', 'Unapproved', '$2y$10iusesomecrazystrings22'),
 (3, 'User1', 'user123', 'User', 'Test', 'user@example.com', '', 'Basic User', 'Approved', '$2y$10iusesomecrazystrings22'),
 (9, 'demo', '$2na18.GA/zY.', '', '', 'demo@example.com', '', 'Basic User', 'Unapproved', '$2y$10iusesomecrazystrings22'),
-(11, 'admin', '$25NMAEGsTy/U', '', '', 'admin@test.com', '', 'Basic User', 'Unapproved', '$2y$10iusesomecrazystrings22');
+(11, 'admin', '$25NMAEGsTy/U', '', '', 'admin@test.com', '', 'Basic User', 'Unapproved', '$2y$10iusesomecrazystrings22'),
+(12, 'user', '$2y$10$M1B7m75IY.OaKLxJ0oOHpOkJeMFc6iBPcaRsi2INMqF6wJQmTwyP.', '', '', 'user@example.com', '', 'Basic User', 'Unapproved', '$2y$10iusesomecrazystrings22');
 
 -- --------------------------------------------------------
 
@@ -168,10 +191,22 @@ ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`);
 
 --
+-- Indexes for table `google_analytics`
+--
+ALTER TABLE `google_analytics`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`);
+
+--
+-- Indexes for table `site_settings`
+--
+ALTER TABLE `site_settings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -208,12 +243,12 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `users_online`
 --
 ALTER TABLE `users_online`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

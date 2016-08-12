@@ -122,8 +122,12 @@ function findAllPosts() {
         $comment_query = mysqli_query($connection, $query);
         $comment_count = mysqli_num_rows($comment_query);
 
+        if($comment_count == 0) {
+            echo "<td>{$comment_count}</td>";
+        } else {
+            echo "<td><a href='comments.php?source=post_comments&post=$post_id'>{$comment_count}</a></td>";
+        }
 
-        echo "<td><a href='?comments&post=$post_id'>{$comment_count}</a></td>";
         echo "<td>{$post_view_count} <a href='posts.php?reset={$post_id}' title='Reset view count'><i class='fa fa-refresh'></i></a></td>";
         echo "<td>{$post_date}</td>";
         echo "<td>{$post_status}</td>";
@@ -258,10 +262,14 @@ function findAllComments() {
 }
 
 function findPostComments() {
+
+    if(isset($_GET['post'])) {
+        $post_id = $_GET['post'];
+    }
     
     global $connection;
     
-    $query = "SELECT *  FROM comments ORDER BY comment_id DESC WHERE post_id = ";
+    $query = "SELECT * FROM comments WHERE comment_post_id = $post_id ";
     $select_posts_admin = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_assoc($select_posts_admin)) {
@@ -276,7 +284,7 @@ function findPostComments() {
         echo "<tr>";
         echo "<td>{$comment_id}</td>";
 
-        $post_query = "SELECT *  FROM posts WHERE post_id = $comment_post_id ";
+        $post_query = "SELECT * FROM posts WHERE post_id = $comment_post_id ";
                             
             $view_post_cat = mysqli_query($connection, $post_query);
     
@@ -632,42 +640,60 @@ function usersOnline() {
 
 }
 
-    if(isset($_GET['onlineusers'])) {
+usersOnline();
 
+// Fucntions for Site Settings
 
-        global $connection;
+function siteInfo() {
 
-        if(!$connection) {
+    global $connection;
 
-            session_start();
+    if(isset($_POST['save'])) {
 
-            include("../includes/db.php");
-
-            $session = session_id();
-            $time = time();
-            $time_out_in_seconds = 05;
-            $time_out = $time - $time_out_in_seconds;
-
-            $query = "SELECT * FROM users_online WHERE session = '$session' ";
-            $send_query = mysqli_query($connection, $query);
-            $count = mysqli_num_rows($send_query);
-
-            if($count == NULL) {
-                mysqli_query($connection, "INSERT INTO users_online(session, session_time) VALUES('$session', '$time') ");
-            } else {
-                mysqli_query($connection, "UPDATE users_online SET session_time = '$time' WHERE session = '$session' ");
-            }
-
-            $users_online_query = "SELECT * FROM users_online WHERE session_time > '$time_out' ";
-            $send_users_query = mysqli_query($connection, $users_online_query);
-            echo $count_users = mysqli_num_rows($send_users_query);
+        if(isset($_GET['tracking_enabled'])) {
+            $trackingEnabled = $_GET['tracking_enabled'];
         }
 
+        $siteName = $_POST['site_name'];
+        $siteEmail = $_POST['site_email'];
+        $trackingCode = $_POST['tracking_code'];
+
+        $query = "INSERT Into site_settings(site_name, site_admin_email, googleAnalyticsIsEnabled, tracking_code) ";
+        $query .= "VALUES('{$siteName}', '{$siteEmail}', $trackingEnabled, '{$trackingCode}')";
+        $send_query = mysqli_query($connection, $query);
+
+        if(!$send_query) {
+            die("Query Failed" . mysqli_error($connection));
+        }
     }
 
 }
 
-usersOnline();
+function updateSiteInfo() {
+
+    global $connection;
+
+    if(isset($_GET['tracking_enabled'])) {
+            $trackingEnabled = $_GET['tracking_enabled'];
+        }
+
+    if(isset($_POST['update'])) {
+
+
+        $siteName = $_POST['site_name'];
+        $siteEmail = $_POST['site_email'];
+        $trackingCode = $_POST['tracking_code'];
+
+        $query = "INSERT Into site_settings(site_name, site_admin_email, googleAnalyticsIsEnabled, tracking_code) SET ";
+        $query .= "VALUES('{$siteName}', '{$siteEmail}', $trackingEnabled, '{$trackingCode}')";
+        $send_query = mysqli_query($connection, $query);
+
+        if(!$send_query) {
+            die("Query Failed" . mysqli_error($connection));
+        }
+    }
+
+}
 
 
 ?>

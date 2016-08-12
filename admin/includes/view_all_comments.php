@@ -24,9 +24,6 @@
 
         </tbody>
 
-        </tbody>
-
-        </tbody>
     </table>
     </div>
 
