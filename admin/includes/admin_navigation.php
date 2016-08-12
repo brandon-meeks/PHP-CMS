@@ -11,7 +11,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-
+                <li><a href="#">Users Online: <span class="usersonline"></span></a></li>
                 <?php include "alerts_dropdown.php"; ?>
                 <?php include "profile_dropdown.php"; ?>
                 <li><a href="../index.php"><i class="fa fa-fw fa-eye"></i> View Website</a></li>

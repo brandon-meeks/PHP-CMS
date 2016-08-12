@@ -24,7 +24,7 @@
 
 		$user_id = $row['user_id'];
 		$username = $row['username'];
-		$password = $row['user_password'];
+		$db_password = $row['user_password'];
 		$user_firstName = $row['user_firstName'];
 		$user_lastName = $row['user_lastName'];
 		$user_role = $row['user_role'];
@@ -33,10 +33,10 @@
 
 	}
 
-	$login_password = crypt($login_password, $password);
+	// $login_password = crypt($login_password, $password);
 
 	// If username and password are not in database, redirect to index
-	if($login_username === $username && $login_password === $password ) {
+	if(password_verify($login_password, $db_password)) {
 
 		$_SESSION['username'] = $username;
 		$_SESSION['user_firstName'] = $user_firstName;

@@ -29,8 +29,8 @@ function createComment() {
 
         }
 
-        $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $comment_post_id ";
-        $update_comment_count_query = mysqli_query($connection, $query);
+        // $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $comment_post_id ";
+        // $update_comment_count_query = mysqli_query($connection, $query);
     }
 
 }

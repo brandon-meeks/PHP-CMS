@@ -117,7 +117,13 @@ function findAllPosts() {
         }
         
         echo "<td>{$post_tags}</td>";
-        echo "<td>{$post_comment_count}</td>";
+
+        $query = "SELECT * FROM comments where comment_post_id = $post_id";
+        $comment_query = mysqli_query($connection, $query);
+        $comment_count = mysqli_num_rows($comment_query);
+
+
+        echo "<td><a href='?comments&post=$post_id'>{$comment_count}</a></td>";
         echo "<td>{$post_view_count} <a href='posts.php?reset={$post_id}' title='Reset view count'><i class='fa fa-refresh'></i></a></td>";
         echo "<td>{$post_date}</td>";
         echo "<td>{$post_status}</td>";
@@ -212,6 +218,50 @@ function findAllComments() {
     global $connection;
     
     $query = "SELECT *  FROM comments ORDER BY comment_id DESC";
+    $select_posts_admin = mysqli_query($connection, $query);
+
+    while($row = mysqli_fetch_assoc($select_posts_admin)) {
+        $comment_id = $row['comment_id'];
+        $comment_post_id = $row['comment_post_id'];
+        $comment_date = $row['comment_date'];
+        $comment_author = $row['comment_author'];
+        $comment_email = $row['comment_email'];
+        $comment_content = $row['comment_content'];
+        $comment_status = $row['comment_status'];
+
+        echo "<tr>";
+        echo "<td>{$comment_id}</td>";
+
+        $post_query = "SELECT *  FROM posts WHERE post_id = $comment_post_id ";
+                            
+            $view_post_cat = mysqli_query($connection, $post_query);
+    
+            while($row = mysqli_fetch_assoc($view_post_cat)) {
+                $post_id = $row['post_id'];
+                $post_title = $row['post_title'];
+
+                echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</a></td>";
+
+            }
+
+        echo "<td>{$comment_date}</td>";
+        echo "<td>{$comment_author}</td>";
+        echo "<td>{$comment_email}</td>";
+        echo "<td>{$comment_content}</td>";
+        echo "<td>{$comment_status}</td>";
+        echo "<td><a href='comments.php?approve=$comment_id' title='approve comment' class='text-success'><i class='fa fa-thumbs-up'></i></a>&nbsp;|&nbsp;";
+        echo "<a href='comments.php?unapprove=$comment_id' title='unapprove comment'><i class='fa fa-thumbs-down'></i></a>&nbsp;|&nbsp;";
+        echo "<a href='comments.php?delete=$comment_id' title='delete comment' class='text-danger'><i class='fa fa-trash'></i></a></td>";
+        echo "</tr>";
+
+    }
+}
+
+function findPostComments() {
+    
+    global $connection;
+    
+    $query = "SELECT *  FROM comments ORDER BY comment_id DESC WHERE post_id = ";
     $select_posts_admin = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_assoc($select_posts_admin)) {
@@ -383,12 +433,7 @@ function createUser() {
         
         move_uploaded_file($user_image_temp, "../images/users/$user_image");
 
-        $saltQuery = "SELECT randSalt FROM users ";
-        $randSaltQuery = mysqli_query($connection, $saltQuery);
-        $row = mysqli_fetch_array($randSaltQuery);
-        $salt = $row['randSalt'];
-
-        $password = crypt($user_password, $salt); // Encrpts the user's password
+        $password = password_hash($user_password, PASSWORD_BCRYPT); // Encrpts the user's password
         
         $query = "INSERT INTO users(username, user_password, user_firstName, user_lastName, user_email, user_image, user_role, user_status)";
         $query .= "VALUES('{$username}', '{$password}', '{$user_firstName}', '{$user_lastName}', '{$user_email}', '{$user_image}', '{$user_role}', '{$user_status}') ";
@@ -549,7 +594,44 @@ function deleteUser() {
     
 }
 
+function usersOnline() {
 
+    if(isset($_GET['onlineusers'])) {
+
+
+        global $connection;
+
+        if(!$connection) {
+
+            session_start();
+
+            include("../includes/db.php");
+
+            $session = session_id();
+            $time = time();
+            $time_out_in_seconds = 05;
+            $time_out = $time - $time_out_in_seconds;
+
+            $query = "SELECT * FROM users_online WHERE session = '$session' ";
+            $send_query = mysqli_query($connection, $query);
+            $count = mysqli_num_rows($send_query);
+
+            if($count == NULL) {
+                mysqli_query($connection, "INSERT INTO users_online(session, session_time) VALUES('$session', '$time') ");
+            } else {
+                mysqli_query($connection, "UPDATE users_online SET session_time = '$time' WHERE session = '$session' ");
+            }
+
+            $users_online_query = "SELECT * FROM users_online WHERE session_time > '$time_out' ";
+            $send_users_query = mysqli_query($connection, $users_online_query);
+            echo $count_users = mysqli_num_rows($send_users_query);
+        }
+
+    }
+
+}
+
+usersOnline();
 
 
 ?>
