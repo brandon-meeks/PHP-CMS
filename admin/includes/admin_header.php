@@ -31,6 +31,7 @@
 
     
     <link href="css/pace.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 
 
     <!-- Custom Fonts -->
@@ -49,6 +50,9 @@
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="js/tinymce.js"></script>
     <script src="js/pace.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 
 
 </head>

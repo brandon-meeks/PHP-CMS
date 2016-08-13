@@ -28,5 +28,8 @@ setInterval(function() {
 	loadUsersOnline();
 }, 500);
 
-
+ 
+// $("#tracking_enabled").click(function(){
+//     $("#tracking_code").toggle();
+// });
 

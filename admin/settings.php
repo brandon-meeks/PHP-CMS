@@ -1,6 +1,11 @@
 <?php include "includes/admin_header.php" ?>
 <!-- <?php include "functions.php" ?> -->
 
+<script type="text/javascript">
+    $("#tracking_enabled").click(function(){
+        $("#trackingGA").toggle();
+    });
+</script>
 
 <div id="wrapper">
 
@@ -23,6 +28,7 @@
                 <!-- /.row -->
 
                 <?php siteInfo(); ?>
+                <?php updateSiteInfo(); ?>
 
                 <?php 
 
@@ -35,7 +41,10 @@
                         $trackingEnabled = $row['googleAnalyticsIsEnabled'];
                         $trackingCode = $row['tracking_code'];
                     }
+
                 ?>
+
+
 
                 <div class="row">
                     <div class="col-md-6">
@@ -65,16 +74,16 @@
                                     <div class="form-group">
                                         <label for="site_name">Enable Google Analytics?</label>
                                         <input type="hidden" name="tracking_enabled" value="0">
-                                        <input type="checkbox" data-toggle="toggle" class="form-control" value="1" id="tracking_enabled" name="tracking_enabled">
+                                        <input type="checkbox" data-toggle="toggle" class="form-control" value="1" id="tracking_enabled" name="tracking_enabled" <?php if($trackingEnabled == 1) { echo "checked";} ?>>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" id="trackingGA">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="site_name">Google Analytics</label>
-                                        <input type="text" class="form-control" value="<?php echo $trackingCode; ?>" id="google_analytics" name="google_analytics" placeholder="UA-xxxxxxxx">
+                                        <input type="text" class="form-control" value="<?php echo $trackingCode; ?>" id="tracking_code" name="tracking_code" placeholder="UA-xxxxxxxx">
                                     </div>
                                 </div>
                             </div>
@@ -108,6 +117,12 @@
 
         </div>
         <!-- /#page-wrapper -->
+
+<!-- <script type="text/javascript">
+    $("#tracking_enabled").click(function(){
+        $("div").removeClass("hide");
+    });
+</script> -->
 
     
 <?php include "includes/admin_footer.php" ?>

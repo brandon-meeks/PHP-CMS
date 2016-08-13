@@ -673,19 +673,22 @@ function updateSiteInfo() {
 
     global $connection;
 
-    if(isset($_GET['tracking_enabled'])) {
-            $trackingEnabled = $_GET['tracking_enabled'];
-        }
-
     if(isset($_POST['update'])) {
 
+        if(isset($_POST['tracking_enabled'])) {
+            $trackingEnabled = $_POST['tracking_enabled'];
+        }
 
         $siteName = $_POST['site_name'];
         $siteEmail = $_POST['site_email'];
         $trackingCode = $_POST['tracking_code'];
 
-        $query = "INSERT Into site_settings(site_name, site_admin_email, googleAnalyticsIsEnabled, tracking_code) SET ";
-        $query .= "VALUES('{$siteName}', '{$siteEmail}', $trackingEnabled, '{$trackingCode}')";
+        $query = "UPDATE site_settings SET ";
+        $query .= "site_name = '{$siteName}', ";
+        $query .= "site_admin_email = '{$siteEmail}', ";
+        $query .= "googleAnalyticsIsEnabled = $trackingEnabled, ";
+        $query .= "tracking_code = '{$trackingCode}'";
+
         $send_query = mysqli_query($connection, $query);
 
         if(!$send_query) {
