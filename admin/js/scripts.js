@@ -29,7 +29,10 @@ setInterval(function() {
 }, 500);
 
  
-// $("#tracking_enabled").click(function(){
-//     $("#tracking_code").toggle();
-// });
+$(document).ready(function() {
+	$("#tracking_enabled").click(function(){
+        $("#trackingGA").toggle();
+    });	
+})
+
 

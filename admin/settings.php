@@ -2,9 +2,14 @@
 <!-- <?php include "functions.php" ?> -->
 
 <script type="text/javascript">
-    $("#tracking_enabled").click(function(){
-        $("#trackingGA").toggle();
-    });
+function valueChanged()
+{
+    if($('#tracking_enabled').is(":checked"))   
+        $("#trackingGA").show();
+    else
+        $("#trackingGA").hide();
+}
+
 </script>
 
 <div id="wrapper">
@@ -74,7 +79,7 @@
                                     <div class="form-group">
                                         <label for="site_name">Enable Google Analytics?</label>
                                         <input type="hidden" name="tracking_enabled" value="0">
-                                        <input type="checkbox" data-toggle="toggle" class="form-control" value="1" id="tracking_enabled" name="tracking_enabled" <?php if($trackingEnabled == 1) { echo "checked";} ?>>
+                                        <input type="checkbox" data-toggle="toggle" class="form-control" value="" id="tracking_enabled" name="tracking_enabled" onchange="valueChanged()" <?php if($trackingEnabled == 1) { echo "checked";} ?>>
                                     </div>
                                 </div>
                             </div>
