@@ -1,6 +1,24 @@
 <?php include "../includes/db.php" ?>
+<?php include "functions.php" ?>
+
 <?php ob_start(); ?>
 <?php session_start(); ?>
+
+<?php 
+
+    $query = "SELECT * from site_settings ";
+    $siteInfoQuery = mysqli_query($connection, $query);
+
+    while($row = mysqli_fetch_assoc($siteInfoQuery)) {
+        $siteName = $row['site_name'];
+        $siteAdminEmail = $row['site_admin_email'];
+        $googleAnalyticsIsEnabled = $row['googleAnalyticsIsEnabled'];
+        $tracking_code = $row['tracking_code'];
+    }
+
+?>
+
+
 
 <?php //Checks if logged in user has role of Admin and if not redirects them to root index
 

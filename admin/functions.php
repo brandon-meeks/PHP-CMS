@@ -125,7 +125,7 @@ function findAllPosts() {
         if($comment_count == 0) {
             echo "<td>{$comment_count}</td>";
         } else {
-            echo "<td><a href='comments.php?source=post_comments&post=$post_id'>{$comment_count}</a></td>";
+            echo "<td><a href='view_post_comments.php?post=$post_id'>{$comment_count}</a></td>";
         }
 
         echo "<td>{$post_view_count} <a href='posts.php?reset={$post_id}' title='Reset view count'><i class='fa fa-refresh'></i></a></td>";
@@ -269,7 +269,7 @@ function findPostComments() {
     
     global $connection;
     
-    $query = "SELECT * FROM comments WHERE comment_post_id = $post_id ";
+    $query = "SELECT * FROM comments WHERE comment_post_id = " . mysqli_real_escape_string($connection, $post_id);
     $select_posts_admin = mysqli_query($connection, $query);
 
     while($row = mysqli_fetch_assoc($select_posts_admin)) {
@@ -284,7 +284,7 @@ function findPostComments() {
         echo "<tr>";
         echo "<td>{$comment_id}</td>";
 
-        $post_query = "SELECT * FROM posts WHERE post_id = $comment_post_id ";
+        $post_query = "SELECT * FROM posts WHERE post_id = " . mysqli_real_escape_string($connection, $comment_post_id);
                             
             $view_post_cat = mysqli_query($connection, $post_query);
     
@@ -697,6 +697,20 @@ function updateSiteInfo() {
     }
 
 }
+
+// function getSiteInfo() {
+//     global $connection;
+
+//     $query = "SELECT * from site_settings ";
+//     $siteInfoQuery = mysqli_query($connection, $query);
+
+//     while($row = mysqli_fetch_assoc($siteInfoQuery)) {
+//         $siteName = $row['site_name'];
+//         $siteAdminEmail = $row['site_admin_email'];
+//         $googleAnalyticsIsEnabled = $row['googleAnalyticsIsEnabled'];
+//         $tracking_code = $row['tracking_code'];
+//     }
+// }
 
 
 ?>

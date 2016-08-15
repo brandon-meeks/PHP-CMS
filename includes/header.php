@@ -25,6 +25,20 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <?php 
+
+    $query = "SELECT * from site_settings ";
+    $siteInfoQuery = mysqli_query($connection, $query);
+
+    while($row = mysqli_fetch_assoc($siteInfoQuery)) {
+        $siteName = $row['site_name'];
+        $siteAdminEmail = $row['site_admin_email'];
+        $googleAnalyticsIsEnabled = $row['googleAnalyticsIsEnabled'];
+        $tracking_code = $row['tracking_code'];
+    }
+    
+    ?>
+
 </head>
 
 <body>
