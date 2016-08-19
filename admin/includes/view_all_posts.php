@@ -1,3 +1,5 @@
+<?php include "includes/delete_modal.php"; ?>
+
 <div class="table-responsive">
 
     <?php 
@@ -152,3 +154,16 @@
         </table>
     </form>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".delete_link").on('click', function() {
+            var post_id = $(this).attr("rel");
+            var post_delete_url = "posts.php?delete=" + post_id + " ";
+            $(".delete_modal_link").attr("href", post_delete_url);
+
+            $("#myModal").modal('show');
+        });
+        
+    });
+</script>

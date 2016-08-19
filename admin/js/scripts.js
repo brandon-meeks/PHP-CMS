@@ -33,6 +33,6 @@ $(document).ready(function() {
 	$("#tracking_enabled").click(function(){
         $("#trackingGA").toggle();
     });	
-})
+});
 
 

@@ -35,6 +35,10 @@ function createComment() {
 
 }
 
+function findCategoryPosts() {
+    global $connection;
+}
+
 
 
 ?>

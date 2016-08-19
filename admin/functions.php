@@ -1,12 +1,20 @@
 <?php
 
+function escape($string) {
+
+    global $connection;
+
+    return mysqli_real_escape_string($connection, trim($string));
+
+}
+
 function insertCategory() {
     
     global $connection;
     
     if(isset($_POST['submit'])) {
                                 
-      $cat_title = $_POST['cat_title'];
+      $cat_title = escape($_POST['cat_title']);
 
         if($cat_title == "" || empty($cat_title)) {
 
@@ -61,7 +69,7 @@ function deleteCategory() {
     
     if(isset($_GET['delete'])) {
                                         
-        $category_id = $_GET['delete'];
+        $category_id = escape($_GET['delete']);
         $query = "DELETE FROM categories WHERE cat_id = {$category_id} ";
         $delete_query = mysqli_query($connection, $query);
         header("Location: categories.php");
@@ -132,7 +140,9 @@ function findAllPosts() {
         echo "<td>{$post_date}</td>";
         echo "<td>{$post_status}</td>";
         echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}' title='edit post'><i class='fa fa-pencil-square-o'></i></a>&nbsp;";
-        echo "<a href='posts.php?delete={$post_id}' title='delete post' class='text-danger'><i class='fa fa-trash'>&nbsp;&nbsp;</i></a></td>";
+        // echo "<a href='posts.php?delete={$post_id}' title='delete post' class='text-danger'><i class='fa fa-trash'>&nbsp;&nbsp;</i></a></td>";
+        echo "<a href='javascript:void(0)' rel='$post_id' title='delete post' class='text-danger delete_link'><i class='fa fa-trash'>&nbsp;&nbsp;</i></a></td>";
+
         echo "</tr>";
 
     }
@@ -155,12 +165,12 @@ function createPost() {
         $post_tags = $_POST['post_tags'];
         $post_content = $_POST['post_content'];
         
-        $post_date = date('m-d-y');
+//        $post_date = date('m-d-y');
         
         
         move_uploaded_file($post_image_temp, "../images/$post_image");
         
-        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags,  post_status) ";
+        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags,  post_status) SET";
         $query .= "VALUES({$post_cat},'{$post_title}','{$post_author}', now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}') ";
         
         $create_post_query = mysqli_query($connection, $query);
@@ -443,7 +453,7 @@ function createUser() {
 
         $password = password_hash($user_password, PASSWORD_BCRYPT); // Encrpts the user's password
         
-        $query = "INSERT INTO users(username, user_password, user_firstName, user_lastName, user_email, user_image, user_role, user_status)";
+        $query = "INSERT INTO users(username, user_password, user_firstName, user_lastName, user_email, user_image, user_role, user_status) SET ";
         $query .= "VALUES('{$username}', '{$password}', '{$user_firstName}', '{$user_lastName}', '{$user_email}', '{$user_image}', '{$user_role}', '{$user_status}') ";
         
         $create_user_query = mysqli_query($connection, $query);
@@ -589,17 +599,22 @@ function updateUserProfile() {
 
 
 function deleteUser() {
+
+    if(isset($_SESSION['user_role'])) {
+
+        if($_SESSION['user_role'] == 'admin') {
     
-    global $connection;
-    
-    if(isset($_GET['delete'])) {
-                                        
-        $the_user_id = $_GET['delete'];
-        $query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
-        $delete_query = mysqli_query($connection, $query);
-        header("Location: users.php");
+            global $connection;
+            
+            if(isset($_GET['delete'])) {
+                                                
+                $the_user_id = mysqli_real_escape_string($connection, $_GET['delete']);
+                $query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
+                $delete_query = mysqli_query($connection, $query);
+                header("Location: users.php");
+            }
+        } 
     }
-    
 }
 
 function usersOnline() {

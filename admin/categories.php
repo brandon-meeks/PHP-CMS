@@ -24,7 +24,7 @@
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label for="cat-title">Category Name</label>
-                                    <input name="cat_title" type="text" class="form-control"/>
+                                    <input name="cat_title" type="text" class="form-control" title="Category Name"/>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" name="submit" value="Add Category" class="btn btn-primary" /><br /><br />

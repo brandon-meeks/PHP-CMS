@@ -196,7 +196,7 @@
                             var options = {
                               chart: {
                                 title: '',
-                                subtitle: '',
+                                subtitle: ''
                               }
                             };
 

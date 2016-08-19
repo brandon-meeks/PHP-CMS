@@ -1,5 +1,5 @@
 <?php include "includes/admin_header.php" ?>
-<!-- <?php include "functions.php" ?> -->
+
 
 <script type="text/javascript">
 function valueChanged()

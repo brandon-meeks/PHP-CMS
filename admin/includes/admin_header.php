@@ -1,7 +1,8 @@
+<?php ob_start(); ?>
 <?php include "../includes/db.php" ?>
 <?php include "functions.php" ?>
 
-<?php ob_start(); ?>
+
 <?php session_start(); ?>
 
 <?php 
@@ -61,6 +62,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- jQuery -->
+    <script src="js/jquery-3.1.0.min.js"></script>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
