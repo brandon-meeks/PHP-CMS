@@ -79,7 +79,7 @@ function valueChanged()
                                     <div class="form-group">
                                         <label for="site_name">Enable Google Analytics?</label>
                                         <input type="hidden" name="tracking_enabled" value="0">
-                                        <input type="checkbox" data-toggle="toggle" class="form-control" value="" id="tracking_enabled" name="tracking_enabled" onchange="valueChanged()" <?php if($trackingEnabled == 1) { echo "checked";} ?>>
+                                        <input type="checkbox" data-toggle="toggle" class="form-control" value="1" id="tracking_enabled" name="tracking_enabled" onchange="valueChanged()" <?php if($trackingEnabled == 1) { echo "checked";} ?>>
                                     </div>
                                 </div>
                             </div>
@@ -92,6 +92,18 @@ function valueChanged()
                                     </div>
                                 </div>
                             </div>
+
+                            <?php if($trackingEnabled == 1) { ?>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="site_name">Google Analytics</label>
+                                            <input type="text" class="form-control" value="<?php echo $trackingCode; ?>" id="tracking_code" name="tracking_code" placeholder="UA-xxxxxxxx">
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+
 
                             <?php 
 

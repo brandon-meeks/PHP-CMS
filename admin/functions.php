@@ -701,8 +701,9 @@ function updateSiteInfo() {
         $query = "UPDATE site_settings SET ";
         $query .= "site_name = '{$siteName}', ";
         $query .= "site_admin_email = '{$siteEmail}', ";
-        $query .= "googleAnalyticsIsEnabled = $trackingEnabled, ";
-        $query .= "tracking_code = '{$trackingCode}'";
+        $query .= "googleAnalyticsIsEnabled = {$trackingEnabled}, ";
+        $query .= "tracking_code = '{$trackingCode}' ";
+
 
         $send_query = mysqli_query($connection, $query);
 

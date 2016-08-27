@@ -42,3 +42,11 @@
 </head>
 
 <body>
+
+<?php 
+
+    if($googleAnalyticsIsEnabled == 1) {
+        include_once("includes/analyticstracking.php");
+    }
+
+?>

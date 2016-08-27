@@ -35,7 +35,7 @@
 
                 <?php
 
-                        $query = "SELECT * FROM posts WHERE post_category_id = {$post_cat_id} ";
+                        $query = "SELECT * FROM posts WHERE post_category_id = {$post_cat_id} AND post_status = 'Published' ";
                         $select_all_posts = mysqli_query($connection, $query);
                         $category_post_count = mysqli_num_rows($select_all_posts);
 
@@ -48,6 +48,7 @@
                                 $post_title = $row['post_title'];
                                 $post_author = $row['post_author'];
                                 $post_date = $row['post_date'];
+                                $post_status = $row['post_status'];
                                 $post_image = $row['post_image'];
                                 $post_content = substr($row['post_content'], 0, 250);
                         
