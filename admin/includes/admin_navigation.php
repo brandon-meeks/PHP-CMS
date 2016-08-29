@@ -27,6 +27,17 @@
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#pages"><i class="fa fa-fw fa-file-text"></i> Pages <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="pages" class="collapse">
+                            <li>
+                                <a href="pages.php">View All Pages</a>
+                            </li>
+                            <li>
+                                <a href="#">Add New Page</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#posts"><i class="fa fa-fw fa-pencil-square-o"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="posts" class="collapse">
                             <li>

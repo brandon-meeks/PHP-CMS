@@ -728,5 +728,93 @@ function updateSiteInfo() {
 //     }
 // }
 
+function findAllPages() {
+    
+    global $connection;
+    
+    $query = "select * from pages ORDER BY page_id DESC";
+    $select_pages_admin = mysqli_query($connection, $query);
+
+    while($row = mysqli_fetch_assoc($select_pages_admin)) {
+        $page_id = $row['page_id'];
+        $page_title = $row['page_title'];
+        $page_author = $row['page_author'];
+        $page_date = $row['page_date'];
+        $page_image = $row['page_image'];
+        $page_body = $row['page_body'];
+        $page_status = $row['page_status'];
+        $page_view_count = $row['page_view_count'];
+
+        echo "<tr>";
+        ?>
+
+        <td><input type="checkbox" class="checkboxes" name="checkboxArray[]" value="<?php echo $page_id; ?>"></td>
+
+        <?php
+        echo "<td>{$page_id}</td>";
+        echo "<td><a href='../post.php?p_id={$page_id}' target='blank'>{$page_title}</a></td>";
+        echo "<td>{$page_author}</td>";
+        echo "<td>{$page_date}</td>";
+
+        if(empty($page_image)) {
+            echo "<td></td>";
+        } else {
+            echo "<td><img src='../images/{$page_image}' alt='{$page_image}' title='{$page_image}' class='img-thumbnail' width='100'/></td>";
+        }
+        
+        // echo "<td>{$post_tags}</td>";
+
+        echo "<td>{$page_view_count} <a href='posts.php?reset={$page_id}' title='Reset view count'><i class='fa fa-refresh'></i></a></td>";
+        
+        echo "<td>{$page_status}</td>";
+        echo "<td><a href='posts.php?source=edit_page&p_id={$page_id}' title='edit page'><i class='fa fa-pencil-square-o'></i></a>&nbsp;";
+        // echo "<a href='posts.php?delete={$post_id}' title='delete post' class='text-danger'><i class='fa fa-trash'>&nbsp;&nbsp;</i></a></td>";
+        echo "<a href='javascript:void(0)' rel='$page_id' title='delete page' class='text-danger delete_page_link'><i class='fa fa-trash'>&nbsp;&nbsp;</i></a></td>";
+
+        echo "</tr>";
+
+    }
+}
+
+function createPage() {
+    
+    global $connection;
+    
+        if(isset($_POST['create_page'])) {
+        
+        $page_title = $_POST['page_title'];
+        $page_author = $_POST['page_author'];
+        $page_status = $_POST['page_status'];
+        
+        $page_image = $_FILES['page_image']['name'];
+        $page_image_temp = $_FILES['page_image']['tmp_name'];
+        
+        $page_body = $_POST['page_body'];
+        
+//        $post_date = date('m-d-y');
+        
+        
+        move_uploaded_file($page_image_temp, "../images/pages/$page_image");
+        
+        $query = "INSERT INTO pages(page_title, page_author, page_date, page_image, page_body, page_status, page_url) ";
+        $query .= "VALUES('{$page_title}','{$page_author}', now(),'{$page_image}','{$page_body}','{$page_status}', '{page_url}') ";
+        
+        $create_page_query = mysqli_query($connection, $query);
+        
+        if(!$create_page_query) {
+
+            die('Page creation failed ' . mysqli_error($connection));
+
+        } else {
+            
+            echo "<div class='alert alert-success alert-dismissible' role='alert'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Page was created successfully!</div>";
+            
+        }
+        
+    }
+    
+}
+
 
 ?>
