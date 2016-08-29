@@ -743,7 +743,8 @@ function findAllPages() {
         $page_image = $row['page_image'];
         $page_body = $row['page_body'];
         $page_status = $row['page_status'];
-        $page_view_count = $row['page_view_count'];
+        $page_url = $row['page_url']
+;        $page_view_count = $row['page_view_count'];
 
         echo "<tr>";
         ?>

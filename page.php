@@ -19,7 +19,7 @@
 		    			$view_query = "UPDATE pages SET page_view_count = page_view_count + 1 WHERE page_url = {$view_page_url} ";
 		                $send_query = mysqli_query($connection, $view_query);
 
-		    			$query = "SELECT * FROM pages WHERE page_url = {$page_url}";
+		    			$query = "SELECT * FROM pages WHERE page_url = '{$view_page_url}'";
 		    			$selectPageQuery = mysqli_query($connection, $query);
 
 		    			while($row = mysqli_fetch_assoc($selectPageQuery)) {
@@ -28,28 +28,25 @@
 		    				$page_body = $row['page_body'];
 		    				$page_status = $row['page_status'];
 
-		    				if($page_status == 'Published') {
-
-
 
 		        ?>
-				        		<h1 class="page-header"><?php echo $page_title; ?></h1>
+		        		<h1 class="page-header"><?php echo $page_title; ?></h1>
 
-				        		<?php 
+		        		<?php 
 
-				                    if(empty($page_image)) {
-				                        echo "";
-				                    } else {
-				                        echo "<img class='img-responsive' src='images/{$page_image}' alt=''>";
-				                    }
+		                    if(empty($page_image)) {
+		                        echo "";
+		                    } else {
+		                        echo "<img class='img-responsive' src='images/{$page_image}' alt=''>";
+		                    }
 
-				                ?>
+		                ?>
 
-				                <div id="page_body">
-				                	<?php echo $page_body; ?>                	
-				                </div> 
+		                <div id="page_body">
+		                	<?php echo $page_body; ?>                	
+		                </div> 
 
-                			<?php } ?>
+                			
 
     					<?php } ?>
 
@@ -60,11 +57,11 @@
 
        		</div>
 
-    	</div>
 
+			<!-- Blog Sidebar Widgets Column -->
+	        <?php include "includes/sidebar.php" ?>
 
-		<!-- Blog Sidebar Widgets Column -->
-        <?php include "includes/sidebar.php" ?>
+	    </div>
 
 
 <?php include "includes/footer.php"; ?>
