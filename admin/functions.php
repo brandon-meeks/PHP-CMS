@@ -752,7 +752,7 @@ function findAllPages() {
 
         <?php
         echo "<td>{$page_id}</td>";
-        echo "<td><a href='../post.php?p_id={$page_id}' target='blank'>{$page_title}</a></td>";
+        echo "<td><a href='../page.php?url={$page_url}' target='blank'>{$page_title}</a></td>";
         echo "<td>{$page_author}</td>";
         echo "<td>{$page_date}</td>";
 
@@ -764,7 +764,7 @@ function findAllPages() {
         
         // echo "<td>{$post_tags}</td>";
 
-        echo "<td>{$page_view_count} <a href='posts.php?reset={$page_id}' title='Reset view count'><i class='fa fa-refresh'></i></a></td>";
+        echo "<td>{$page_view_count} <a href='pages.php?reset={$page_id}' title='Reset view count'><i class='fa fa-refresh'></i></a></td>";
         
         echo "<td>{$page_status}</td>";
         echo "<td><a href='posts.php?source=edit_page&p_id={$page_id}' title='edit page'><i class='fa fa-pencil-square-o'></i></a>&nbsp;";
@@ -812,6 +812,24 @@ function createPage() {
             
         }
         
+    }
+    
+}
+
+function resetPageViews() {
+    
+    global $connection;
+    
+    if(isset($_GET['reset'])) {
+                                        
+        $the_page_id = $_GET['reset'];
+        $query = "UPDATE pages SET page_view_count = 0 WHERE page_id = {$the_page_id} ";
+        $reset_query = mysqli_query($connection, $query);
+        header("Location: pages.php");
+
+        if(!$reset_query) {
+            die("Reset Failed" . mysqli_error($connection));
+        }
     }
     
 }
