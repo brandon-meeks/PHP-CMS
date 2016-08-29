@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2016 at 11:02 PM
+-- Generation Time: Aug 29, 2016 at 07:09 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -79,6 +79,31 @@ CREATE TABLE `google_analytics` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `page_id` int(3) NOT NULL,
+  `page_title` varchar(255) NOT NULL,
+  `page_author` varchar(255) NOT NULL,
+  `page_date` date NOT NULL,
+  `page_image` text NOT NULL,
+  `page_body` text NOT NULL,
+  `page_url` varchar(255) NOT NULL,
+  `page_status` varchar(255) NOT NULL,
+  `page_view_count` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`page_id`, `page_title`, `page_author`, `page_date`, `page_image`, `page_body`, `page_url`, `page_status`, `page_view_count`) VALUES
+(1, 'Test Page', 'demo', '2016-08-28', '', '<p>This is just some text</p>', 'test-page', 'Published', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -101,13 +126,10 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `post_category_id`, `post_title`, `post_author`, `post_date`, `post_image`, `post_content`, `post_tags`, `post_comment_count`, `post_status`, `post_view_count`) VALUES
-(1, 1, 'Brandons PHP CMS Post', 'John Doe', '2016-06-21', 'logo-black-sm.png', '<p><strong>Wow, I really like making this CMS.</strong></p>', 'CMS, Javascript, PHP', 2, 'Published', 0),
-(7, 1, 'Test Test', 'Brandon', '2007-01-16', '', 'testing date', 'PHP, Date', 4, 'Published', 0),
-(16, 1, 'This is my post', 'Brandon Meeks', '2016-07-21', 'about-bg.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur metus sit amet fringilla varius. In eu orci diam. Quisque laoreet tellus nec eros mattis, eget tincidunt justo laoreet. Pellentesque sit amet ornare ligula, suscipit placerat dui. Ut varius ex at neque mattis blandit eu non quam. Pellentesque egestas diam felis, a pharetra ipsum mollis eu. Curabitur quis efficitur neque. Nulla ultricies condimentum tincidunt. Nulla nec augue nec sapien feugiat congue. Pellentesque posuere congue leo, sed dictum dui hendrerit at. Fusce tincidunt tortor et arcu elementum, vitae cursus lacus interdum. Aliquam sit amet tempor ipsum. Morbi pellentesque leo magna, a finibus purus varius auctor. Etiam tempus nec dui a blandit. Proin pellentesque et arcu nec aliquet. Duis facilisis est non est porta, condimentum tempus massa vestibulum.', 'PHP, CMS, Testing', 0, 'Published', 4),
+(1, 1, 'Brandons PHP CMS Post', 'John Doe', '2016-06-21', 'logo-black-sm.png', '<p><strong>Wow, I really like making this CMS.</strong></p>', 'CMS, Javascript, PHP', 2, 'Draft', 0),
 (18, 1, 'This is my post', 'Brandon Meeks', '2016-07-21', 'about-bg.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur metus sit amet fringilla varius. In eu orci diam. Quisque laoreet tellus nec eros mattis, eget tincidunt justo laoreet. Pellentesque sit amet ornare ligula, suscipit placerat dui. Ut varius ex at neque mattis blandit eu non quam. Pellentesque egestas diam felis, a pharetra ipsum mollis eu. Curabitur quis efficitur neque. Nulla ultricies condimentum tincidunt. Nulla nec augue nec sapien feugiat congue. Pellentesque posuere congue leo, sed dictum dui hendrerit at. Fusce tincidunt tortor et arcu elementum, vitae cursus lacus interdum. Aliquam sit amet tempor ipsum. Morbi pellentesque leo magna, a finibus purus varius auctor. Etiam tempus nec dui a blandit. Proin pellentesque et arcu nec aliquet. Duis facilisis est non est porta, condimentum tempus massa vestibulum.', 'PHP, CMS, Testing', 0, 'Published', 4),
 (19, 3, 'PHP Programming', 'brandon', '2016-07-21', '', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie sapien id elit faucibus facilisis ut et quam. Nulla dolor nibh, dictum vitae urna vitae, maximus elementum risus. Nulla a gravida arcu. Mauris luctus velit at dolor varius, ut dignissim risus tempus. Suspendisse libero nunc, consectetur vitae posuere ut, vehicula ac enim. Donec mattis lorem at lectus porta vulputate. Maecenas malesuada ullamcorper imperdiet.</p>\r\n<p>Nam nec viverra libero. Maecenas sit amet massa porttitor, porttitor risus et, vestibulum enim. Sed aliquam dolor luctus nisi mollis tempor. Vestibulum ac eros non dolor egestas consectetur a eget massa. Etiam fringilla velit a dignissim congue. Fusce feugiat sem odio, vel auctor dui aliquam et. Phasellus tristique lectus massa, id aliquet diam scelerisque ac. In dapibus eleifend congue. Fusce eget ligula egestas ligula molestie vestibulum quis quis ex. Vivamus facilisis tincidunt egestas. Maecenas euismod turpis quis odio facilisis eleifend ac mollis leo. Nulla elit tellus, vulputate non imperdiet eget, mollis ut turpis. Sed in varius nisi, a auctor enim. Aliquam vel orci ut eros viverra imperdiet.</p>\r\n<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis metus velit, tristique sed egestas at, sodales ac sem. Donec non nisl sed leo tempus interdum. Fusce ullamcorper lorem id justo porttitor, consequat accumsan nulla porta. Integer sodales odio neque, in porttitor odio aliquam sit amet. Aliquam vel mattis tortor, id fringilla enim. Maecenas eu purus pharetra, ultricies risus at, euismod est. Sed a risus nec augue egestas ultricies non sit amet odio. Nulla tincidunt, massa id posuere tincidunt, urna augue vehicula ligula, eget sodales velit ligula vel ipsum. Vestibulum sodales et neque eget ullamcorper.</p>', 'WebDev', 1, 'Published', 7),
 (20, 3, 'PHP Programming', 'brandon', '2016-08-01', '', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie sapien id elit faucibus facilisis ut et quam. Nulla dolor nibh, dictum vitae urna vitae, maximus elementum risus. Nulla a gravida arcu. Mauris luctus velit at dolor varius, ut dignissim risus tempus. Suspendisse libero nunc, consectetur vitae posuere ut, vehicula ac enim. Donec mattis lorem at lectus porta vulputate. Maecenas malesuada ullamcorper imperdiet.</p>\r\n<p>Nam nec viverra libero. Maecenas sit amet massa porttitor, porttitor risus et, vestibulum enim. Sed aliquam dolor luctus nisi mollis tempor. Vestibulum ac eros non dolor egestas consectetur a eget massa. Etiam fringilla velit a dignissim congue. Fusce feugiat sem odio, vel auctor dui aliquam et. Phasellus tristique lectus massa, id aliquet diam scelerisque ac. In dapibus eleifend congue. Fusce eget ligula egestas ligula molestie vestibulum quis quis ex. Vivamus facilisis tincidunt egestas. Maecenas euismod turpis quis odio facilisis eleifend ac mollis leo. Nulla elit tellus, vulputate non imperdiet eget, mollis ut turpis. Sed in varius nisi, a auctor enim. Aliquam vel orci ut eros viverra imperdiet.</p>\r\n<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis metus velit, tristique sed egestas at, sodales ac sem. Donec non nisl sed leo tempus interdum. Fusce ullamcorper lorem id justo porttitor, consequat accumsan nulla porta. Integer sodales odio neque, in porttitor odio aliquam sit amet. Aliquam vel mattis tortor, id fringilla enim. Maecenas eu purus pharetra, ultricies risus at, euismod est. Sed a risus nec augue egestas ultricies non sit amet odio. Nulla tincidunt, massa id posuere tincidunt, urna augue vehicula ligula, eget sodales velit ligula vel ipsum. Vestibulum sodales et neque eget ullamcorper.</p>', 'WebDev', 0, 'Published', 0),
-(21, 1, 'This is my post', 'Brandon Meeks', '2016-08-01', 'about-bg.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur metus sit amet fringilla varius. In eu orci diam. Quisque laoreet tellus nec eros mattis, eget tincidunt justo laoreet. Pellentesque sit amet ornare ligula, suscipit placerat dui. Ut varius ex at neque mattis blandit eu non quam. Pellentesque egestas diam felis, a pharetra ipsum mollis eu. Curabitur quis efficitur neque. Nulla ultricies condimentum tincidunt. Nulla nec augue nec sapien feugiat congue. Pellentesque posuere congue leo, sed dictum dui hendrerit at. Fusce tincidunt tortor et arcu elementum, vitae cursus lacus interdum. Aliquam sit amet tempor ipsum. Morbi pellentesque leo magna, a finibus purus varius auctor. Etiam tempus nec dui a blandit. Proin pellentesque et arcu nec aliquet. Duis facilisis est non est porta, condimentum tempus massa vestibulum.', 'PHP, CMS, Testing', 0, 'Published', 0),
 (22, 1, 'This is my post', 'Brandon Meeks', '2016-08-01', 'about-bg.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur metus sit amet fringilla varius. In eu orci diam. Quisque laoreet tellus nec eros mattis, eget tincidunt justo laoreet. Pellentesque sit amet ornare ligula, suscipit placerat dui. Ut varius ex at neque mattis blandit eu non quam. Pellentesque egestas diam felis, a pharetra ipsum mollis eu. Curabitur quis efficitur neque. Nulla ultricies condimentum tincidunt. Nulla nec augue nec sapien feugiat congue. Pellentesque posuere congue leo, sed dictum dui hendrerit at. Fusce tincidunt tortor et arcu elementum, vitae cursus lacus interdum. Aliquam sit amet tempor ipsum. Morbi pellentesque leo magna, a finibus purus varius auctor. Etiam tempus nec dui a blandit. Proin pellentesque et arcu nec aliquet. Duis facilisis est non est porta, condimentum tempus massa vestibulum.', 'PHP, CMS, Testing', 0, 'Published', 0);
 
 -- --------------------------------------------------------
@@ -129,7 +151,7 @@ CREATE TABLE `site_settings` (
 --
 
 INSERT INTO `site_settings` (`id`, `site_name`, `site_admin_email`, `googleAnalyticsIsEnabled`, `tracking_code`) VALUES
-(0, 'Test Site', '', 0, '');
+(0, 'Test Sites', 'test@email.com', 0, 'ua-123456');
 
 -- --------------------------------------------------------
 
@@ -197,6 +219,12 @@ ALTER TABLE `google_analytics`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`page_id`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -234,6 +262,11 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `comments`
   MODIFY `comment_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `page_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `posts`
 --
